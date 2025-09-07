@@ -6,7 +6,8 @@
   const API_ENDPOINTS = {
     students: `${API_BASE_URL}/students`,
     guardians: `${API_BASE_URL}/guardians`,
-    authorizations: `${API_BASE_URL}/authorizations`
+    authorizations: `${API_BASE_URL}/authorizations`,
+    authorization: `${API_BASE_URL}/authorization`
   };
 
   let students = [];
@@ -55,7 +56,7 @@
     selectedAuthorization = null;
     error_authorization_details = '';
     try {
-      const res = await fetch(`${API_ENDPOINTS.authorizations}/${id}`);
+      const res = await fetch(`${API_ENDPOINTS.authorization}/${id}`);
       if (!res.ok) throw new Error(await res.text());
       selectedAuthorization = await res.json();
     } catch (err) {
