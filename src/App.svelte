@@ -47,7 +47,21 @@
       error_authorizations = err.message;
     }
   });
-  
+
+  let selectedAuthorization = null;
+  let error_authorization_details = '';
+
+  async function loadAuthorizationDetails(id) {
+    selectedAuthorization = null;
+    error_authorization_details = '';
+    try {
+      const res = await fetch(`${API_ENDPOINTS.authorizations}/${id}`);
+      if (!res.ok) throw new Error(await res.text());
+      selectedAuthorization = await res.json();
+    } catch (err) {
+      error_authorization_details = err.message;
+    }
+  }
 </script>
 
 {#if error_students}
@@ -81,7 +95,20 @@
   <h3>Autorizaciones</h3>
   <ul>
     {#each authorizations as a}
-      <li>{a.title} ({a.id})</li>
+      <li>
+        {a.title} ({a.id})
+        <button on:click={() => loadAuthorizationDetails(a.id)}>
+          Ver detalles
+        </button>
+      </li>
     {/each}
   </ul>
+  {#if error_authorization_details}
+    <p class="error">{error_authorization_details}</p>
+  {:else if selectedAuthorization}
+    <div class="authorization-details">
+      <h4>Detalles de la autorización</h4>
+      <pre>{JSON.stringify(selectedAuthorization, null, 2)}</pre>
+    </div>
+  {/if}
 {/if}
