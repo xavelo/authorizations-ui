@@ -6,7 +6,7 @@
 
   onMount(async () => {
     try {
-      const res = await fetch('/api/students');
+      const res = await fetch(`${import.meta.env.API_BASE_URL}/students`);
       if (!res.ok) throw new Error(await res.text());
       students = await res.json();
     } catch (err) {
@@ -19,7 +19,7 @@
 
   onMount(async () => {
     try {
-      const res = await fetch('/api/guardians');
+      const res = await fetch(`${import.meta.env.API_BASE_URL}/guardians`);
       if (!res.ok) throw new Error(await res.text());
       guardians = await res.json();
     } catch (err) {
@@ -32,7 +32,7 @@
 
   onMount(async () => {
     try {
-      const res = await fetch('/api/authorizations');
+      const res = await fetch(`${import.meta.env.API_BASE_URL}/authorizations`);
       if (!res.ok) throw new Error(await res.text());
       authorizations = await res.json();
     } catch (err) {
