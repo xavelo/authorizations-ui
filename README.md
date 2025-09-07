@@ -2,6 +2,12 @@
 
 This template should help get you started developing with Svelte in Vite.
 
+## Running locally
+
+The app expects an API base URL provided through the `VITE_API_BASE_URL` environment variable.
+A default value is included in `.env.development` so that the dev server uses the same
+API endpoint as production. Update this file if you need to point to a different backend.
+
 ## Recommended IDE Setup
 
 [VS Code](https://code.visualstudio.com/) + [Svelte](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode).
