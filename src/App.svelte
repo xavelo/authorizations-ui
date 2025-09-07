@@ -97,10 +97,15 @@
   <ul>
     {#each authorizations as a}
       <li>
-        {a.title} ({a.id})
-        <button on:click={() => loadAuthorizationDetails(a.id)}>
-          Ver detalles
-        </button>
+        {a.title} (
+        <span
+          class="authorization-id"
+          role="button"
+          tabindex="0"
+          on:click={() => loadAuthorizationDetails(a.id)}
+          on:keydown={(e) => (e.key === 'Enter' || e.key === ' ') && loadAuthorizationDetails(a.id)}
+          >{a.id}</span
+        >)
       </li>
     {/each}
   </ul>
@@ -109,7 +114,44 @@
   {:else if selectedAuthorization}
     <div class="authorization-details">
       <h4>Detalles de la autorización</h4>
-      <pre>{JSON.stringify(selectedAuthorization, null, 2)}</pre>
+      <table>
+        <tbody>
+          {#each Object.entries(selectedAuthorization) as [key, value]}
+            <tr>
+              <th scope="row">{key}</th>
+              <td>{value}</td>
+            </tr>
+          {/each}
+        </tbody>
+      </table>
     </div>
   {/if}
 {/if}
+
+<style>
+  .authorization-id {
+    cursor: pointer;
+    border-radius: 4px;
+    padding: 0 2px;
+  }
+
+  .authorization-id:hover {
+    background-color: lightgray;
+  }
+
+  .authorization-details table {
+    border-collapse: collapse;
+  }
+
+  .authorization-details th,
+  .authorization-details td {
+    border: 1px solid #ccc;
+    padding: 4px 8px;
+    text-align: left;
+  }
+
+  .authorization-details th {
+    background-color: #f9f9f9;
+    font-weight: normal;
+  }
+</style>
