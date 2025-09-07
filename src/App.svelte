@@ -5,9 +5,10 @@
 
   const API_ENDPOINTS = {
     students: `${API_BASE_URL}/students`,
-    teachers: `${API_BASE_URL}/teachers`,
-    courses: `${API_BASE_URL}/courses`
+    guardians: `${API_BASE_URL}/guardians`,
+    authorizations: `${API_BASE_URL}/authorizations`
   };
+
   let students = [];
   let error_students = '';
 
