@@ -150,8 +150,7 @@
     text-align: left;
   }
 
-  .authorization-details th {
-    background-color: #f9f9f9;
-    font-weight: normal;
+  .authorization-details th {  
+    font-weight: bolder;
   }
 </style>
