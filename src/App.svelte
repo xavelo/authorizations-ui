@@ -114,11 +114,16 @@
   {:else if selectedAuthorization}
     <div class="authorization-details">
       <h4>Detalles de la autorización</h4>
-      <ul>
-        {#each Object.entries(selectedAuthorization) as [key, value]}
-          <li><strong>{key}:</strong> {value}</li>
-        {/each}
-      </ul>
+      <table>
+        <tbody>
+          {#each Object.entries(selectedAuthorization) as [key, value]}
+            <tr>
+              <th scope="row">{key}</th>
+              <td>{value}</td>
+            </tr>
+          {/each}
+        </tbody>
+      </table>
     </div>
   {/if}
 {/if}
@@ -132,5 +137,21 @@
 
   .authorization-id:hover {
     background-color: lightgray;
+  }
+
+  .authorization-details table {
+    border-collapse: collapse;
+  }
+
+  .authorization-details th,
+  .authorization-details td {
+    border: 1px solid #ccc;
+    padding: 4px 8px;
+    text-align: left;
+  }
+
+  .authorization-details th {
+    background-color: #f9f9f9;
+    font-weight: normal;
   }
 </style>
