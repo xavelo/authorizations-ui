@@ -1,12 +1,19 @@
 <script>
   import { onMount } from 'svelte';
 
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
+  const API_ENDPOINTS = {
+    students: `${API_BASE_URL}/students`,
+    teachers: `${API_BASE_URL}/teachers`,
+    courses: `${API_BASE_URL}/courses`
+  };
   let students = [];
   let error_students = '';
 
   onMount(async () => {
     try {
-      const res = await fetch(`${import.meta.env.API_BASE_URL}/students`);
+      const res = await fetch(API_ENDPOINTS.students);
       if (!res.ok) throw new Error(await res.text());
       students = await res.json();
     } catch (err) {
@@ -19,7 +26,7 @@
 
   onMount(async () => {
     try {
-      const res = await fetch(`${import.meta.env.API_BASE_URL}/guardians`);
+      const res = await fetch(API_ENDPOINTS.guardians);
       if (!res.ok) throw new Error(await res.text());
       guardians = await res.json();
     } catch (err) {
@@ -32,7 +39,7 @@
 
   onMount(async () => {
     try {
-      const res = await fetch(`${import.meta.env.API_BASE_URL}/authorizations`);
+      const res = await fetch(API_ENDPOINTS.authorizations);
       if (!res.ok) throw new Error(await res.text());
       authorizations = await res.json();
     } catch (err) {
