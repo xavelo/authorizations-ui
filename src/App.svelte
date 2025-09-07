@@ -97,10 +97,15 @@
   <ul>
     {#each authorizations as a}
       <li>
-        {a.title} ({a.id})
-        <button on:click={() => loadAuthorizationDetails(a.id)}>
-          Ver detalles
-        </button>
+        {a.title} (
+        <span
+          class="authorization-id"
+          role="button"
+          tabindex="0"
+          on:click={() => loadAuthorizationDetails(a.id)}
+          on:keydown={(e) => (e.key === 'Enter' || e.key === ' ') && loadAuthorizationDetails(a.id)}
+          >{a.id}</span
+        >)
       </li>
     {/each}
   </ul>
@@ -109,7 +114,23 @@
   {:else if selectedAuthorization}
     <div class="authorization-details">
       <h4>Detalles de la autorización</h4>
-      <pre>{JSON.stringify(selectedAuthorization, null, 2)}</pre>
+      <ul>
+        {#each Object.entries(selectedAuthorization) as [key, value]}
+          <li><strong>{key}:</strong> {value}</li>
+        {/each}
+      </ul>
     </div>
   {/if}
 {/if}
+
+<style>
+  .authorization-id {
+    cursor: pointer;
+    border-radius: 4px;
+    padding: 0 2px;
+  }
+
+  .authorization-id:hover {
+    background-color: lightgray;
+  }
+</style>
